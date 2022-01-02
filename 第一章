@@ -34,8 +34,8 @@ year = 1
 while year <= period:
     value = amount + (inrate * amount)
     print("Year {} Rs. {:.2f}".format(year, value))	
-			#Year {} Rs. {:.2f}".format(year, value) 称为字符串格式化。大括号和其中的字符会被替换成传入 str.format() 的参数，也即 year 和 value。
-			#其中 {:.2f} 的意思是替换为 2 位精度的浮点数。
+			#Year {} Rs. {:.2f}".format(year, value) 称为字符串格式化。大括号和其中的字符会被替换成传入 str.format() 的参数，
+			#也即 year 和 value。其中 {:.2f} 的意思是替换为 2 位精度的浮点数。
     amount = value
     year = year + 1
 
@@ -60,7 +60,8 @@ print("Fahrenheit Celsius")
 while fahrenheit <= 250:
     celsius = (fahrenheit - 32) / 1.8 # 转换为摄氏度
     print("{:5d} {:7.2f}".format(fahrenheit , celsius))
-			#{:5d} 的意思是替换为 5 个字符宽度的整数， {:7.2f}的意思是替换为为 7 个字符宽度的保留两位的小数，小数点也算一个宽度，宽度不足则使用空格填充。
+			#{:5d} 的意思是替换为 5 个字符宽度的整数， {:7.2f}的意思是替换为为 7 个字符宽度的保留两位的小数，
+			#小数点也算一个宽度，宽度不足则使用空格填充。
     fahrenheit = fahrenheit + 25
 		
 单行定义多个变量或赋值 		
@@ -92,15 +93,56 @@ print("Months = {} Days = {}".format(*divmod(days, 30)))
 	#作用于一个普通的非逻辑值时，短路运算符的返回值通常是能够最先确定结果的那个操作数。
 	#关系运算可以通过逻辑运算符 and 和 or 组合，比较的结果可以用 not 来取反意。
 	#逻辑运算符的优先级又低于关系运算符，在它们之中，not 具有最高的优先级，or 优先级最低，所以 A and not B or C 等于 (A and (notB)) or C。
->>> 5 and 4  
-4
->>> 0 and 4   
-0
->>> False or 3 or 0
-3
->>> 2 > 1 and not 3 > 5 or 4
-True
-
+	>>> 5 and 4  
+	4
+	>>> 0 and 4   
+	0
+	>>> False or 3 or 0
+	3
+	>>> 2 > 1 and not 3 > 5 or 4
+	True
 	
+类型转换函数
+	float(string) 	字符串 -> 浮点值
+	int(string) 	字符串 -> 整数值
+	str(integer) 	整数值 -> 字符串
+	str(float) 	浮点值 -> 字符串
+
+计算数列 1/x+1/(x+1)+1/(x+2)+ ... +1/n，我们设 x = 1，n = 10
+#!/usr/bin/env python3
+sum = 0
+for i in range(1, 11):
+    sum += 1.0 / i
+    print("{:2d} {:6.4f}".format(i , sum))
+
+求解一元二次方程
+#!/usr/bin/env python3
+import math
+a = int(input("Enter value of a: "))
+b = int(input("Enter value of b: "))
+c = int(input("Enter value of c: "))
+d = b * b - 4 * a * c
+if d < 0:
+    print("ROOTS are imaginary")
+else:
+    root1 = (-b + math.sqrt(d)) / (2 * a)
+    root2 = (-b - math.sqrt(d)) / (2 * a)
+    print("Root 1 = ", root1)
+    print("Root 2 = ", root2)
+
+salesmansalary.py
+计算一位数码相机销售人员的工资。他的基本工资是 1500，每售出一台相机他可以得到 200 并且获得 2% 的抽成。程序要求输入相机数量及单价。
+#!/usr/bin/env python3
+basic_salary = 1500
+bonus_rate = 200
+commission_rate = 0.02
+numberofcamera = int(input("Enter the number of inputs sold: "))
+price = float(input("Enter the price of camera: "))
+bonus = (bonus_rate * numberofcamera)
+commission = (commission_rate * price * numberofcamera)
+print("Bonus        = {:6.2f}".format(bonus))
+print("Commission   = {:6.2f}".format(commission))
+print("Gross salary = {:6.2f}".format(basic_salary + bonus + commission))
+
 	
 	
