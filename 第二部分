@@ -1,0 +1,64 @@
+#实验四 控制流If-else
+number100.py
+程序接受用户输入的一个数并且检查这个数是否小于 100。
+#!/usr/bin/env python3
+number = int(input("Enter a number: "))
+if number < 100:
+    print("The number is less than 100")
+elif number == 100:
+    print("The number is 100")
+else:
+    print("The number is greater than 100")
+
+真值检验
+if x:
+    pass
+    
+fibonacci.py  
+斐波那契（Fibonacci）数列   
+#!/usr/bin/env python3
+a, b = 0, 1
+while b < 100:
+    print(b, end=' ') #默认包含换行符。用end=' '替代换行符，输出空格
+    a, b = b, a + b
+print()
+
+powerseries.py
+计算幂级数：e^x = 1 + x + x^2 / 2! + x^3 / 3! + ... + x^n / n! （0 < x < 1）。
+#!/usr/bin/env python3
+x = float(input("Enter the value of x: "))
+n = term = 1
+result = 1.0
+while n <= 100:
+    term *= x / n
+    result += term
+    n += 1
+    if term < 0.0001:
+        break
+print("No of Times= {} and Sum= {}".format(n, result))
+
+multiplication.py
+打印 10 以内的乘法表
+#!/usr/bin/env python3
+i = 1
+print("-" * 50) #字符串若是乘上整数 n，将返回由 n 个此字符串拼接起来的新字符串。
+while i < 11:
+    n = 1
+    while n <= 10:
+        print("{:4d}".format(i * n), end=' ')
+        n += 1
+    print()
+    i += 1
+print("-" * 50)
+
+design1.py
+打印星号的一些例子
+#!/usr/bin/env python3
+row = int(input("Enter the number of rows: "))
+n = row
+while n >= 0:
+    x = "*" * n
+    y = " " * (row - n)
+    print(y + x)
+    n -= 1
+
