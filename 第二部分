@@ -13,7 +13,8 @@ else:
 真值检验
 if x:
     pass
-    
+
+#实验五 循环
 fibonacci.py  
 斐波那契（Fibonacci）数列   
 #!/usr/bin/env python3
@@ -61,4 +62,116 @@ while n >= 0:
     y = " " * (row - n)
     print(y + x)
     n -= 1
+
+数据结构-列表
+它可以写作中括号之间的一列逗号分隔的值。列表的元素不必是同一类型。
+a = [ 1, 342, 223, 'India', 'Fedora']，它的索引编号从0开始，a[0] a[-1] a[:] a[0:-1] a[:-2] a[-2:]
+Python 中有关下标的集合都满足左闭右开原则，切片中也是如此，也就是说集合左边界值能取到，右边界值不能取到。
+对上面的列表， a[0:5] 用数学表达式可以写为 [0,5) ，其索引取值为 0,1,2,3,4，所以能将a中所有值获取到。
+切片并设置步长：>>> a[1::2]  从切片索引 1 到列表末尾，每隔两个元素取值。
+连接操作>>> a + [36, 49, 64, 81, 100]
+[1, 342, 223, 'India', 'Fedora', 36, 49, 64, 81, 100]
+修改元素>>> cubes = [1, 8, 27, 65, 125] >>> cubes[3] = 64
+切片赋值，此操作可以改变列表的尺寸，或清空它：
+>>> letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+>>> # 替换某些值
+>>> letters[2:5] = ['C', 'D', 'E']
+>>> # 现在移除他们
+>>> letters[2:5] = []
+>>> # 通过替换所有元素为空列表来清空这个列表
+>>> letters[:] = []
+检查某个值是否存在于列表中
+>>> a = ['ShiYanLou', 'is', 'cool']
+>>> 'cool' in a
+True
+>>> 'Linux' in a
+False
+获得列表的长度
+>>> len(a)
+检查列表是否为空
+if list_name: # 列表不为空
+    pass
+else: # 列表为空
+    pass
+列表是允许嵌套
+>>> a = ['a', 'b', 'c']
+>>> n = [1, 2, 3]
+>>> x = [a, n]
+>>> x  [['a', 'b', 'c'], [1, 2, 3]]
+>>> x[0]  ['a', 'b', 'c']
+>>> x[0][1]  ‘b’
+
+for循环
+>>> a = ['ShiYanLou', 'is', 'powerful']
+>>> for x in a:
+...     print(x)
+...
+ShiYanLou
+is
+powerful
+
+range()函数：生成一个等差数列（并不是列表）
+>>> for i in range(5):
+...     print(i)
+...
+0
+1
+2
+3
+4
+>>> range(1, 5)
+range(1, 5)
+>>> list(range(1, 5))
+[1, 2, 3, 4]
+>>> list(range(1, 15, 3))
+[1, 4, 7, 10, 13]
+>>> list(range(4, 15, 2))
+[4, 6, 8, 10, 12, 14]
+
+continue.py
+continue语句，循环输入正数，并计算平方
+#!/usr/bin/env python3
+while True:
+    n = int(input("Please enter an Integer: "))
+    if n < 0:
+        continue # 这会返回到循环开始处执行
+    elif n == 0:
+        break
+    print("Square is ", n ** 2)
+print("Goodbye")
+
+循环的else语句：
+在循环后面使用可选的 else 语句。它将会在循环完毕后执行，除非有 break 语句终止了循环。
+
+sticks.py
+棍子游戏:有 21 根棍子，首先用户选 1 到 4 根棍子，然后电脑选 1 到 4 根棍子。谁选到最后一根棍子谁就输。判断一下用户有赢的机会吗？
+如果没有的话，如何修改游戏规则可以使用户有赢的机会呢？特别说明：用户和电脑一次选的棍子总数只能是 5。
+#!/usr/bin/env python3
+sticks = 21
+
+print("There are 21 sticks, you can take 1-4 number of sticks at a time.")
+print("Whoever will take the last stick will lose")
+
+while True:
+    print("Sticks left: " , sticks)
+    if sticks == 1:
+        print("You took the last stick, you lose")
+        break
+    sticks_taken = int(input("Take sticks(1-4):"))
+    if sticks_taken >= 5 or sticks_taken <= 0:
+        print("Wrong choice")
+        continue
+    print("Computer took: " , (5 - sticks_taken) , "\n")
+    sticks -= 5
+
+#实验六 数据结构
+
+
+
+
+
+
+
+
+
 
