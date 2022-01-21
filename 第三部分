@@ -67,4 +67,119 @@ if __name__ == '__main__':
 而 “__main__” 始终指当前执行模块的名称（包含后缀.py）。进而当模块被直接执行时，__name__ == 'main' 结果为真。
 原文链接：https://blog.csdn.net/heqiang525/article/details/89879056
 
+局域与全局变量：
+在函数内部使用global a，通过关键字 global 来告诉 a 的定义是全局的，因此在函数内部更改了 a 的值，函数外 a 的值也实际上更改了。
+
+函数的参数变量可以有默认值，也就是说如果我们在调用函数时对指定的参数变量没有给出任何值则会赋其默认值。
+>>> def test(a , b=-99):
+第一个：具有默认值的参数后面不能再有普通参数，比如 f(a,b=90,c) 就是错误的。
+第二个：默认值只被赋值一次，如果默认值是任何可变对象时会有所不同，比如列表、字典或大多数类的实例。
+例如，下面的函数在后续调用过程中会累积（前面）传给它的参数:
+>>> def f(a, data=[]):
+...     data.append(a)
+...     return data
+...
+>>> print(f(1))
+[1]
+>>> print(f(2))
+[1, 2]
+>>> print(f(3))
+[1, 2, 3]
+要避免这个问题，你可以这样做：
+>>> def f(a, data=None):
+...     if data is None:
+...         data = []
+...     data.append(a)
+...     return data
+...
+>>> print(f(1))
+[1]
+>>> print(f(2))
+[2]
+
+函数可以通过关键字参数的形式来调用，形如 keyword = value。如下：
+>>> def func(a, b=5, c=10):
+...     print('a is', a, 'and b is', b, 'and c is', c)
+...
+>>> func(12, 24)
+a is 12 and b is 24 and c is 10
+>>> func(12, c = 24)
+a is 12 and b is 5 and c is 24
+>>> func(b = 12, c = 24, a = -1)
+a is -1 and b is 12 and c is 24
+
+我们也能将函数的参数标记为只允许使用关键字参数。用户调用函数时将只能对每一个参数使用相应的关键字参数。
+>>> def hello(*, name='User'):
+...     print("Hello", name)
+...
+>>> hello('shiyanlou')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: hello() takes 0 positional arguments but 1 was given
+>>> hello(name='shiyanlou')
+Hello shiyanlou
+
+#!/usr/bin/env python3
+import math
+
+文档字符串是一个重要工具，用于解释文档程序，帮助你的程序文档更加简单易懂。
+我们可以在函数体的第一行使用一对三个单引号 ''' 或者一对三个双引号 """ 来定义文档字符串。
+你可以使用 __doc__（注意双下划线）调用函数中的文档字符串属性。
+def longest_side(a, b):
+    """
+    Function to find the length of the longest side of a right triangle.
+
+    :arg a: Side a of the triangle
+    :arg b: Side b of the triangle
+
+    :return: Length of the longest side c as float
+    """
+    return math.sqrt(a*a + b*b)
+
+if __name__ == '__main__':
+    print(longest_side.__doc__)	#调用函数中的文档字符串属性。
+    print(longest_side(4,5))
+
+高阶函数（_Higher-order function_）或仿函数（_functor_）是可以接受函数作为参数的函数：
+
+    使用一个或多个函数作为参数
+    返回另一个函数作为输出
+Python 里的任何函数都可以作为高阶函数
+# 创建一个函数，将参数列表中每个元素都变成全大写
+>>> def high(l):
+...     return [i.upper() for i in l]
+...
+# 创建高阶函数，接受一个函数和一个列表作为参数
+>>> def test(h, l):
+...     return h(l)
+...
+>>> l = ['python', 'Linux', 'Git']
+# 运行高阶函数，返回预期的结果
+>>> test(high, l)
+['PYTHON', 'LINUX', 'GIT']
+
+map 函数
+
+map 是一个在 Python 里非常有用的高阶函数。它接受一个函数和一个序列（迭代器）作为输入，
+然后对序列（迭代器）的每一个值应用这个函数，返回一个序列（迭代器），其包含应用函数后的结果。
+>>> lst = [1, 2, 3, 4, 5]
+>>> def square(num):
+...     "返回所给数字的平方."
+...     return num * num
+...
+>>> print(list(map(square, lst)))
+[1, 4, 9, 16, 25]
+
+#第九章 文件打开
+我们使用 open() 函数打开文件。它需要两个参数，第一个参数是文件路径或文件名，第二个是文件的打开模式。模式通常是下面这样的：
+
+    "r"，以只读模式打开，你只能读取文件但不能编辑/删除文件的任何内容
+    "w"，以写入模式打开，如果文件存在将会删除里面的所有内容，然后打开这个文件进行写入
+    "a"，以追加模式打开，写入到文件中的任何数据将自动添加到末尾
+
+默认的模式为只读模式，也就是说如果你不提供任何模式，open() 函数将会以只读模式打开文件。
+>>> fobj = open("sample.txt")
+>>> fobj
+<_io.TextIOWrapper name='sample.txt' mode='r' encoding='UTF-8'>
+>>> fobj.close()	#打开文件后我们应该总是关闭文件。我们使用方法 close() 完成这个操作。
 
